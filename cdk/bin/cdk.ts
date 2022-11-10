@@ -1,6 +1,6 @@
 import "source-map-support/register";
-import { App } from "aws-cdk-lib";
+import { GuRootExperimental } from "@guardian/cdk/lib/experimental/constructs/root";
 import { SnykTagMonitor } from "../lib/snyk-tag-monitor";
 
-const app = new App();
-new SnykTagMonitor(app, "SnykTagMonitor-PROD", { stack: "snyk-tag-monitor", stage: "PROD" });
+const app = new GuRootExperimental();
+new SnykTagMonitor(app, "SnykTagMonitor-PROD", { stack: "snyk-tag-monitor", stage: "PROD", env: {region : "eu-west-1"}});
