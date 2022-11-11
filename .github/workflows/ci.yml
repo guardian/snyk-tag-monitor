@@ -34,6 +34,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
+          cache-dependency-path: 'cdk/package-lock.json'
 
       - name: Run script/ci
         run: ./scripts/ci.sh
