@@ -1,5 +1,4 @@
-# Find full documentation here 
-https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
+# Find full documentation here https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
 name: CI
 
 on:
@@ -15,8 +14,7 @@ jobs:
   CI:
     runs-on: ubuntu-latest
 
-    # See 
-https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
+    # See https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
     permissions:
       # required by aws-actions/configure-aws-credentials
       id-token: write
