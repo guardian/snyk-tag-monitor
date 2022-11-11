@@ -13,7 +13,7 @@ export class SnykTagMonitor extends GuStack {
   constructor(scope: App, id: string, props: GuStackProps) {
     super(scope, id, props);
 
-    const app = "snykTagMonitor"
+    const app = "snyk-tag-monitor"
     const lambdaProps: GuScheduledLambdaProps = {
       rules: [{ schedule: Schedule.rate(Duration.days(2))}],
       monitoringConfiguration: {

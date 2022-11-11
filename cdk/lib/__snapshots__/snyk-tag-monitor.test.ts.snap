@@ -28,6 +28,10 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
             "Value": "TEST",
           },
           {
+            "Key": "gu:repo",
+            "Value": "guardian/snyk-tag-monitor",
+          },
+          {
             "Key": "Stack",
             "Value": "snyk-tag-monitor",
           },
@@ -50,6 +54,10 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
             "Value": "TEST",
           },
           {
+            "Key": "gu:repo",
+            "Value": "guardian/snyk-tag-monitor",
+          },
+          {
             "Key": "Stack",
             "Value": "snyk-tag-monitor",
           },
@@ -62,21 +70,21 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
       "Type": "AWS::SecretsManager::Secret",
       "UpdateReplacePolicy": "Delete",
     },
-    "snykTagMonitorC6DE8D52": {
+    "snyktagmonitor01C2294D": {
       "DependsOn": [
-        "snykTagMonitorServiceRoleDefaultPolicyD3E14FF1",
-        "snykTagMonitorServiceRoleB0F00E63",
+        "snyktagmonitorServiceRoleDefaultPolicy2C0C2161",
+        "snyktagmonitorServiceRole8EBA8B3B",
       ],
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "DistributionBucketName",
           },
-          "S3Key": "snyk-tag-monitor/TEST/snykTagMonitor/snykTagMonitor.zip",
+          "S3Key": "snyk-tag-monitor/TEST/snyk-tag-monitor/snyk-tag-monitor.zip",
         },
         "Environment": {
           "Variables": {
-            "APP": "snykTagMonitor",
+            "APP": "snyk-tag-monitor",
             "STACK": "snyk-tag-monitor",
             "STAGE": "TEST",
           },
@@ -85,7 +93,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
         "MemorySize": 512,
         "Role": {
           "Fn::GetAtt": [
-            "snykTagMonitorServiceRoleB0F00E63",
+            "snyktagmonitorServiceRole8EBA8B3B",
             "Arn",
           ],
         },
@@ -93,11 +101,15 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "snykTagMonitor",
+            "Value": "snyk-tag-monitor",
           },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/snyk-tag-monitor",
           },
           {
             "Key": "Stack",
@@ -112,7 +124,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
-    "snykTagMonitorErrorPercentageAlarmForLambdaB14EC5AE": {
+    "snyktagmonitorErrorPercentageAlarmForLambda2893A757": {
       "Properties": {
         "ActionsEnabled": true,
         "AlarmActions": [
@@ -138,7 +150,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
             "",
             [
               {
-                "Ref": "snykTagMonitorC6DE8D52",
+                "Ref": "snyktagmonitor01C2294D",
               },
               " exceeded 50% error rate",
             ],
@@ -150,7 +162,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
             [
               "High error % from ",
               {
-                "Ref": "snykTagMonitorC6DE8D52",
+                "Ref": "snyktagmonitor01C2294D",
               },
               " lambda in TEST",
             ],
@@ -168,7 +180,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                 [
                   "Error % of ",
                   {
-                    "Ref": "snykTagMonitorC6DE8D52",
+                    "Ref": "snyktagmonitor01C2294D",
                   },
                 ],
               ],
@@ -182,7 +194,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                   {
                     "Name": "FunctionName",
                     "Value": {
-                      "Ref": "snykTagMonitorC6DE8D52",
+                      "Ref": "snyktagmonitor01C2294D",
                     },
                   },
                 ],
@@ -202,7 +214,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                   {
                     "Name": "FunctionName",
                     "Value": {
-                      "Ref": "snykTagMonitorC6DE8D52",
+                      "Ref": "snyktagmonitor01C2294D",
                     },
                   },
                 ],
@@ -220,7 +232,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
-    "snykTagMonitorServiceRoleB0F00E63": {
+    "snyktagmonitorServiceRole8EBA8B3B": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -251,11 +263,15 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
         "Tags": [
           {
             "Key": "App",
-            "Value": "snykTagMonitor",
+            "Value": "snyk-tag-monitor",
           },
           {
             "Key": "gu:cdk:version",
             "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/snyk-tag-monitor",
           },
           {
             "Key": "Stack",
@@ -269,7 +285,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "snykTagMonitorServiceRoleDefaultPolicyD3E14FF1": {
+    "snyktagmonitorServiceRoleDefaultPolicy2C0C2161": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -308,7 +324,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                       {
                         "Ref": "DistributionBucketName",
                       },
-                      "/snyk-tag-monitor/TEST/snykTagMonitor/snykTagMonitor.zip",
+                      "/snyk-tag-monitor/TEST/snyk-tag-monitor/snyk-tag-monitor.zip",
                     ],
                   ],
                 },
@@ -329,7 +345,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/TEST/snyk-tag-monitor/snykTagMonitor",
+                    ":parameter/TEST/snyk-tag-monitor/snyk-tag-monitor",
                   ],
                 ],
               },
@@ -352,7 +368,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                     {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/TEST/snyk-tag-monitor/snykTagMonitor/*",
+                    ":parameter/TEST/snyk-tag-monitor/snyk-tag-monitor/*",
                   ],
                 ],
               },
@@ -360,16 +376,16 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "snykTagMonitorServiceRoleDefaultPolicyD3E14FF1",
+        "PolicyName": "snyktagmonitorServiceRoleDefaultPolicy2C0C2161",
         "Roles": [
           {
-            "Ref": "snykTagMonitorServiceRoleB0F00E63",
+            "Ref": "snyktagmonitorServiceRole8EBA8B3B",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "snykTagMonitorsnykTagMonitorrate2days0071005E9": {
+    "snyktagmonitorsnyktagmonitorrate2days0855530AE": {
       "Properties": {
         "ScheduleExpression": "rate(2 days)",
         "State": "ENABLED",
@@ -377,7 +393,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
           {
             "Arn": {
               "Fn::GetAtt": [
-                "snykTagMonitorC6DE8D52",
+                "snyktagmonitor01C2294D",
                 "Arn",
               ],
             },
@@ -387,19 +403,19 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
       },
       "Type": "AWS::Events::Rule",
     },
-    "snykTagMonitorsnykTagMonitorrate2days0AllowEventRuleSnykTagMonitorsnykTagMonitorCB4676A08A2C8694": {
+    "snyktagmonitorsnyktagmonitorrate2days0AllowEventRuleSnykTagMonitorsnyktagmonitorAE4097CF9D0524BC": {
       "Properties": {
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
           "Fn::GetAtt": [
-            "snykTagMonitorC6DE8D52",
+            "snyktagmonitor01C2294D",
             "Arn",
           ],
         },
         "Principal": "events.amazonaws.com",
         "SourceArn": {
           "Fn::GetAtt": [
-            "snykTagMonitorsnykTagMonitorrate2days0071005E9",
+            "snyktagmonitorsnyktagmonitorrate2days0855530AE",
             "Arn",
           ],
         },

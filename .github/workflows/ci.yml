@@ -42,12 +42,11 @@ jobs:
       - name: Upload to riff-raff
         uses: guardian/actions-riff-raff@v2
         with:
-          app: github-lens
-          buildNumber: ${{ env.GITHUB_RUN_NUMBER }}
-          projectName: deploy::github-lens
-          configPath: packages/cdk/cdk.out/riff-raff.yaml
+          app: snyk-tag-monitor
+          projectName: security::snyk-tag-monitor
+          configPath: cdk/cdk.out/riff-raff.yaml
           contentDirectories: |
             cdk.out:
-              - packages/cdk/cdk.out
+              - cdk/cdk.out
             snyk-tag-monitor:
-              - packages/snyk-tag-monitor/snykTagMonitor.zip
+              - snyk-tag-monitor.zip
