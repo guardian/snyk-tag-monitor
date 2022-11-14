@@ -26,7 +26,7 @@ export class SnykTagMonitor extends GuStack {
         snsTopicName: topic.topicName,
       },
       runtime: Runtime.PYTHON_3_9,
-      handler: "lib/handler.handler",
+      handler: "main.hello",
       app,
       fileName: `${app}.zip` 
     }

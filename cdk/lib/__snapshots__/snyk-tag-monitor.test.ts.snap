@@ -89,7 +89,7 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
             "STAGE": "TEST",
           },
         },
-        "Handler": "lib/handler.handler",
+        "Handler": "main.hello",
         "MemorySize": 512,
         "Role": {
           "Fn::GetAtt": [
