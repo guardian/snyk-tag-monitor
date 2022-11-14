@@ -1,1 +1,2 @@
-* @guardian/devx-security @guardian/devx-operations
+@guardian/devx-operations
+@guardian/devx-security
