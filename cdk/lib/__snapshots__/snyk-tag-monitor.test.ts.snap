@@ -140,7 +140,13 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                 {
                   "Ref": "AWS::AccountId",
                 },
-                ":devx-alerts",
+                ":",
+                {
+                  "Fn::GetAtt": [
+                    "snyktagmonitortopicF2FA58D7",
+                    "TopicName",
+                  ],
+                },
               ],
             ],
           },
@@ -421,6 +427,39 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
         },
       },
       "Type": "AWS::Lambda::Permission",
+    },
+    "snyktagmonitortopicF2FA58D7": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "gu:cdk:version",
+            "Value": "TEST",
+          },
+          {
+            "Key": "gu:repo",
+            "Value": "guardian/snyk-tag-monitor",
+          },
+          {
+            "Key": "Stack",
+            "Value": "snyk-tag-monitor",
+          },
+          {
+            "Key": "Stage",
+            "Value": "TEST",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+    "snyktagmonitortopicdevxsecurityguardiancoukCC41C9E5": {
+      "Properties": {
+        "Endpoint": "devx.security@guardian.co.uk",
+        "Protocol": "email",
+        "TopicArn": {
+          "Ref": "snyktagmonitortopicF2FA58D7",
+        },
+      },
+      "Type": "AWS::SNS::Subscription",
     },
   },
 }
