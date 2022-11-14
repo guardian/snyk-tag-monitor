@@ -3,4 +3,4 @@ import { GuRootExperimental } from "@guardian/cdk/lib/experimental/constructs/ro
 import { SnykTagMonitor } from "../lib/snyk-tag-monitor";
 
 const app = new GuRootExperimental();
-new SnykTagMonitor(app, "SnykTagMonitor-PROD", { stack: "security", stage: "PROD", env: {region : "eu-west-1"}});
+new SnykTagMonitor(app, "SnykTagMonitor-INFRA", { stack: "security", stage: "INFRA", env: {region : "eu-west-1"}});
