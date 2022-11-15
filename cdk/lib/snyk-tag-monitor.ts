@@ -31,11 +31,11 @@ export class SnykTagMonitor extends GuStack {
       fileName: `${app}.zip` 
     }
 
-    const snykTagLambda = new GuScheduledLambda(this,
+    new GuScheduledLambda(this,
       app, lambdaProps)
 
-    const snykApiKey = new Secret(this, "snykApiKey")
-    const snykGroupId = new Secret(this, "snykGroupId")
+    new Secret(this, "snykApiKey")
+    new Secret(this, "snykGroupId")
 
   }
 }
