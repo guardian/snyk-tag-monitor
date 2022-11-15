@@ -85,11 +85,38 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
         "Environment": {
           "Variables": {
             "APP": "snyk-tag-monitor",
+            "SNS_TOPIC_ARN": {
+              "Ref": "snyktagmonitortopicF2FA58D7",
+            },
+            "SNYK_API_KEY": {
+              "Fn::Join": [
+                "",
+                [
+                  "{{resolve:secretsmanager:",
+                  {
+                    "Ref": "snykApiKey74CA4C53",
+                  },
+                  ":SecretString:::}}",
+                ],
+              ],
+            },
+            "SNYK_GROUP_ID": {
+              "Fn::Join": [
+                "",
+                [
+                  "{{resolve:secretsmanager:",
+                  {
+                    "Ref": "snykGroupId969912A0",
+                  },
+                  ":SecretString:::}}",
+                ],
+              ],
+            },
             "STACK": "snyk-tag-monitor",
             "STAGE": "TEST",
           },
         },
-        "Handler": "main.hello",
+        "Handler": "main.handler",
         "MemorySize": 512,
         "Role": {
           "Fn::GetAtt": [
@@ -377,6 +404,13 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                     ":parameter/TEST/snyk-tag-monitor/snyk-tag-monitor/*",
                   ],
                 ],
+              },
+            },
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Resource": {
+                "Ref": "snyktagmonitortopicF2FA58D7",
               },
             },
           ],
