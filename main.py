@@ -6,17 +6,21 @@ import boto3
 group_id =  os.environ.get("SNYK_GROUP_ID", None)
 snyk_api_key =  os.environ.get("SNYK_API_KEY", None)
 sns_topic_arn = os.environ.get("SNS_TOPIC_ARN", None)
+stage = os.environ.get("STAGE", "DEV")
 page_size = 100
 tag_warning_limit = 900
 tag_hard_limit = 1000
 
-def send_notification(sns_topic_arn: str, message: str):
-    client = boto3.client('sns')
-    client.publish(
-        TargetArn = sns_topic_arn,
-        Message = message,
-        Subject = "Approaching snyk tag limit - action required"
-    )
+def send_notification(sns_topic_arn: str, message: str, stage: str):
+    if (stage == "INFRA"):
+        client = boto3.client('sns')
+        client.publish(
+            TargetArn = sns_topic_arn,
+            Message = message,
+            Subject = "Approaching snyk tag limit - action required"
+        )
+    else:
+        print("Local environment detected. Not attempting to publish")
 
 def get_snyk_tag_page(group_id: str, snyk_api_key: str, page_number: int, page_size: int) -> Response:
     snykurl = "https://api.snyk.io/api/v1/group/" + group_id + "/tags?perPage=" + str(page_size) + "&page=" + str(page_number)
