@@ -27,21 +27,24 @@ export class SnykTagMonitor extends GuStack {
 		const lambdaProps: GuScheduledLambdaProps = {
 			rules: [{ schedule: Schedule.rate(Duration.days(2)) }],
 			monitoringConfiguration: {
-				toleratedErrorPercentage: 50,
-				snsTopicName: topic.topicName,
+				noMonitoring : true
 			},
 			runtime: Runtime.PYTHON_3_9,
 			handler: 'main.handler',
 			app,
 			fileName: `${app}.zip`,
 			environment: {
-				SNYK_GROUP_ID: snykGroupId.secretValue.toString(),
-				SNYK_API_KEY: snykApiKey.secretValue.toString(),
+				SNYK_API_KEY_ARN: snykApiKey.secretArn,
+				SNYK_GROUP_ID_ARN: snykGroupId.secretArn,
 				SNS_TOPIC_ARN: topic.topicArn,
 			},
 		};
 
 		const lambda = new GuScheduledLambda(this, app, lambdaProps);
+
 		topic.grantPublish(lambda);
+		snykApiKey.grantRead(lambda)
+		snykGroupId.grantRead(lambda)
+		
 	}
 }
