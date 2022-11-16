@@ -5,7 +5,8 @@ set -x
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 ROOT_DIR="${DIR}/.."
-(
+APP_NAME="snyk-tag-monitor"
+( #CDK build step
   cd "${ROOT_DIR}"/cdk
   npm ci
   npm run lint
@@ -14,6 +15,12 @@ ROOT_DIR="${DIR}/.."
   npm run build
 )
 
-filename="main.py"
-app_name="snyk-tag-monitor"
-zip -FSj "${app_name}.zip" "$filename"
+( #Steps to package the python venv
+  MAJOR_PYTHON_VERSION="3.9"
+  PACKAGE_ROOT_DIR="${DIR}/.venv/lib/python${MAJOR_PYTHON_VERSION}/site-packages"
+  ZIP_FILE="${APP_NAME}.zip"
+  cp "${DIR}/main.py" "${PACKAGE_ROOT_DIR}"
+  cd "${PACKAGE_ROOT_DIR}"
+  zip -FSr ${ZIP_FILE} .
+  mv "${PACKAGE_ROOT_DIR}/${ZIP_FILE}" "${DIR}/${ZIP_FILE}"
+)
