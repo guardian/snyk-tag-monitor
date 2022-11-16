@@ -35,6 +35,10 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: 'cdk/package-lock.json'
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' 
 
       - name: Run script/ci
         run: ./scripts/ci.sh
