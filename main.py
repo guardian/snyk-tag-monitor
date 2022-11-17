@@ -9,8 +9,8 @@ client_config = Config(
 )
 def get_secret_value_from_arn(arn_env_var, secret_client) -> str:
     arn_value: str | None = os.environ.get(arn_env_var, None)
-    secret_value: str = secret_client.get_secret_value(SecretId=arn_value)
-    return secret_value
+    secret_value = secret_client.get_secret_value(SecretId=arn_value)
+    return secret_value['SecretString']
 
 def send_notification(sns_topic_arn: str, message: str, stage: str):
     if (stage == "INFRA"):
