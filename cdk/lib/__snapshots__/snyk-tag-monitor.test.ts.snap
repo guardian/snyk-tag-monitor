@@ -18,58 +18,6 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
     },
   },
   "Resources": {
-    "snykApiKey74CA4C53": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "GenerateSecretString": {},
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/snyk-tag-monitor",
-          },
-          {
-            "Key": "Stack",
-            "Value": "snyk-tag-monitor",
-          },
-          {
-            "Key": "Stage",
-            "Value": "TEST",
-          },
-        ],
-      },
-      "Type": "AWS::SecretsManager::Secret",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "snykGroupId969912A0": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "GenerateSecretString": {},
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/snyk-tag-monitor",
-          },
-          {
-            "Key": "Stack",
-            "Value": "snyk-tag-monitor",
-          },
-          {
-            "Key": "Stage",
-            "Value": "TEST",
-          },
-        ],
-      },
-      "Type": "AWS::SecretsManager::Secret",
-      "UpdateReplacePolicy": "Delete",
-    },
     "snyktagmonitor01C2294D": {
       "DependsOn": [
         "snyktagmonitorServiceRoleDefaultPolicy2C0C2161",
@@ -85,11 +33,14 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
         "Environment": {
           "Variables": {
             "APP": "snyk-tag-monitor",
+            "SNS_TOPIC_ARN": {
+              "Ref": "snyktagmonitortopicF2FA58D7",
+            },
             "STACK": "snyk-tag-monitor",
             "STAGE": "TEST",
           },
         },
-        "Handler": "main.hello",
+        "Handler": "main.handler",
         "MemorySize": 512,
         "Role": {
           "Fn::GetAtt": [
@@ -377,6 +328,13 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
                     ":parameter/TEST/snyk-tag-monitor/snyk-tag-monitor/*",
                   ],
                 ],
+              },
+            },
+            {
+              "Action": "sns:Publish",
+              "Effect": "Allow",
+              "Resource": {
+                "Ref": "snyktagmonitortopicF2FA58D7",
               },
             },
           ],

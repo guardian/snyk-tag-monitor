@@ -466,3 +466,9 @@ tags
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/python,venv,node,vim,intellij,visualstudiocode
+
+# We're fighting against the auto-generated .gitignore
+# TODO remove the auto-generated rules?
+!scripts
+
+.venv
