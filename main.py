@@ -34,7 +34,7 @@ def get_snyk_tags(snyk_group_id: str, snyk_api_key: str, page_number: int, tags:
     page_size: int = 1000
     print(f'{len(tags)} tags on page {page_number}')
     response: Response = get_snyk_tag_page(snyk_group_id, snyk_api_key, page_number, page_size)
-    
+
     if(response.status_code != 200):
         print("Failed to make request to Snyk")
         print(response.text)
@@ -50,8 +50,10 @@ def get_snyk_tags(snyk_group_id: str, snyk_api_key: str, page_number: int, tags:
             return tags + get_snyk_tags(snyk_group_id, snyk_api_key, next_page, tags_on_this_page)
         else:
             return tags + tags_on_this_page
-        
+
 def handler(event = None, context = None):
+    print("The snyk-tag-monitor is starting.")
+
     tag_warning_limit = 900
     tag_hard_limit = 1000
     stage = os.environ.get("STAGE", "DEV")
@@ -66,6 +68,8 @@ def handler(event = None, context = None):
     if(number_of_tags > tag_warning_limit):
         msg = f'There are currently {number_of_tags} Snyk tags. Snyk has a limit of {tag_hard_limit} tags. Go do something about it...'
         send_notification(sns_topic_arn, msg, stage)
+
+    print("Done. The snyk-tag-monitor completed successfully.")
 
 if __name__ == "__main__":
     handler()
