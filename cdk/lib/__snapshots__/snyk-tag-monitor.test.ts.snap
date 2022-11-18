@@ -18,58 +18,6 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
     },
   },
   "Resources": {
-    "snykApiKey74CA4C53": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "GenerateSecretString": {},
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/snyk-tag-monitor",
-          },
-          {
-            "Key": "Stack",
-            "Value": "snyk-tag-monitor",
-          },
-          {
-            "Key": "Stage",
-            "Value": "TEST",
-          },
-        ],
-      },
-      "Type": "AWS::SecretsManager::Secret",
-      "UpdateReplacePolicy": "Delete",
-    },
-    "snykGroupId969912A0": {
-      "DeletionPolicy": "Delete",
-      "Properties": {
-        "GenerateSecretString": {},
-        "Tags": [
-          {
-            "Key": "gu:cdk:version",
-            "Value": "TEST",
-          },
-          {
-            "Key": "gu:repo",
-            "Value": "guardian/snyk-tag-monitor",
-          },
-          {
-            "Key": "Stack",
-            "Value": "snyk-tag-monitor",
-          },
-          {
-            "Key": "Stage",
-            "Value": "TEST",
-          },
-        ],
-      },
-      "Type": "AWS::SecretsManager::Secret",
-      "UpdateReplacePolicy": "Delete",
-    },
     "snyktagmonitor01C2294D": {
       "DependsOn": [
         "snyktagmonitorServiceRoleDefaultPolicy2C0C2161",
@@ -87,12 +35,6 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
             "APP": "snyk-tag-monitor",
             "SNS_TOPIC_ARN": {
               "Ref": "snyktagmonitortopicF2FA58D7",
-            },
-            "SNYK_API_KEY_ARN": {
-              "Ref": "snykApiKey74CA4C53",
-            },
-            "SNYK_GROUP_ID_ARN": {
-              "Ref": "snykGroupId969912A0",
             },
             "STACK": "snyk-tag-monitor",
             "STAGE": "TEST",
@@ -393,26 +335,6 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
               "Effect": "Allow",
               "Resource": {
                 "Ref": "snyktagmonitortopicF2FA58D7",
-              },
-            },
-            {
-              "Action": [
-                "secretsmanager:GetSecretValue",
-                "secretsmanager:DescribeSecret",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Ref": "snykApiKey74CA4C53",
-              },
-            },
-            {
-              "Action": [
-                "secretsmanager:GetSecretValue",
-                "secretsmanager:DescribeSecret",
-              ],
-              "Effect": "Allow",
-              "Resource": {
-                "Ref": "snykGroupId969912A0",
               },
             },
           ],

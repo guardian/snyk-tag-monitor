@@ -21,9 +21,6 @@ export class SnykTagMonitor extends GuStack {
 			new EmailSubscription('devx.security@guardian.co.uk'),
 		);
 
-		const snykApiKey = new Secret(this, 'snykApiKey');
-		const snykGroupId = new Secret(this, 'snykGroupId');
-
 		const lambdaProps: GuScheduledLambdaProps = {
 			rules: [{ schedule: Schedule.rate(Duration.days(2)) }],
 			monitoringConfiguration: {
@@ -35,8 +32,6 @@ export class SnykTagMonitor extends GuStack {
 			app,
 			fileName: `${app}.zip`,
 			environment: {
-				SNYK_API_KEY_ARN: snykApiKey.secretArn,
-				SNYK_GROUP_ID_ARN: snykGroupId.secretArn,
 				SNS_TOPIC_ARN: topic.topicArn,
 			},
 		};
@@ -44,8 +39,6 @@ export class SnykTagMonitor extends GuStack {
 		const lambda = new GuScheduledLambda(this, app, lambdaProps);
 
 		topic.grantPublish(lambda);
-		snykApiKey.grantRead(lambda)
-		snykGroupId.grantRead(lambda)
 		
 	}
 }

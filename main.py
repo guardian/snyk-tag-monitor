@@ -4,9 +4,6 @@ from requests import Response
 import boto3
 from botocore.config import Config
 
-client_config = Config(
-    region_name = 'eu-west-1',
-)
 def get_secret_value_from_arn(arn_env_var, secret_client) -> str:
     arn_value: str | None = os.environ.get(arn_env_var, None)
     secret_value = secret_client.get_secret_value(SecretId=arn_value)
@@ -52,14 +49,17 @@ def get_snyk_tags(snyk_group_id: str, snyk_api_key: str, page_number: int, tags:
 def handler(event = None, context = None):
     print("The snyk-tag-monitor is starting.")
 
+    client_config = Config(
+    region_name = 'eu-west-1',
+    )
+
     tag_warning_limit = 900
     tag_hard_limit = 1000
     stage = os.environ.get("STAGE", "DEV")
-    secret_client = boto3.client('secretsmanager', config = client_config)
-
+    parameter_store_client = client = boto3.client('ssm', config = client_config)
+    snyk_api_key = parameter_store_client.get_parameter(Name = f"/INFRA/security/snyk-tag-monitor/snyk-api-key", WithDecryption=True)['Parameter']['Value']
+    snyk_group_id = parameter_store_client.get_parameter(Name = f"/INFRA/security/snyk-tag-monitor/snyk-group-id")['Parameter']['Value']
     sns_topic_arn: str = os.environ.get("SNS_TOPIC_ARN", None)
-    snyk_group_id: str = get_secret_value_from_arn("SNYK_GROUP_ID_ARN", secret_client)
-    snyk_api_key: str = get_secret_value_from_arn("SNYK_API_KEY_ARN", secret_client)
 
     all_tags = get_snyk_tags(snyk_group_id, snyk_api_key, 1)
     number_of_tags = len(all_tags)
