@@ -32,7 +32,6 @@ def get_snyk_tag_page(snyk_group_id: str, snyk_api_key: str, page_number: int, p
 
 def get_snyk_tags(snyk_group_id: str, snyk_api_key: str, page_number: int, tags: list =[]):
     page_size: int = 1000
-    print(f'{len(tags)} tags on page {page_number}')
     response: Response = get_snyk_tag_page(snyk_group_id, snyk_api_key, page_number, page_size)
 
     if(response.status_code != 200):
@@ -42,11 +41,10 @@ def get_snyk_tags(snyk_group_id: str, snyk_api_key: str, page_number: int, tags:
     else:
         response_json = response.json()
         tags_on_this_page = response_json['tags']
-        print(f'tags on this page: {len(tags_on_this_page)}')
+        print(f'page: {page_number}, tags: {len(tags_on_this_page)}')
 
         if(len(tags_on_this_page) == page_size):
             next_page = page_number + 1
-            print(f'Getting page {next_page}')
             return tags + get_snyk_tags(snyk_group_id, snyk_api_key, next_page, tags_on_this_page)
         else:
             return tags + tags_on_this_page
