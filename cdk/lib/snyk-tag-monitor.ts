@@ -27,7 +27,8 @@ export class SnykTagMonitor extends GuStack {
 		const lambdaProps: GuScheduledLambdaProps = {
 			rules: [{ schedule: Schedule.rate(Duration.days(2)) }],
 			monitoringConfiguration: {
-				noMonitoring : true
+				toleratedErrorPercentage: 50,
+				snsTopicName: topic.topicName,
 			},
 			runtime: Runtime.PYTHON_3_9,
 			handler: 'main.handler',
