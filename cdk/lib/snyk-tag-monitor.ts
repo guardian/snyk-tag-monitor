@@ -6,7 +6,6 @@ import type { App } from 'aws-cdk-lib';
 import { Duration } from 'aws-cdk-lib';
 import { Schedule } from 'aws-cdk-lib/aws-events';
 import { Runtime } from 'aws-cdk-lib/aws-lambda';
-import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
 import { Topic } from 'aws-cdk-lib/aws-sns';
 import { EmailSubscription } from 'aws-cdk-lib/aws-sns-subscriptions';
 
@@ -22,7 +21,7 @@ export class SnykTagMonitor extends GuStack {
 		);
 
 		const lambdaProps: GuScheduledLambdaProps = {
-			rules: [{ schedule: Schedule.rate(Duration.days(2)) }],
+			rules: [{ schedule: Schedule.rate(Duration.days(1)) }],
 			monitoringConfiguration: {
 				toleratedErrorPercentage: 50,
 				snsTopicName: topic.topicName,
