@@ -14,4 +14,4 @@ variable is a quick way to do this)
 
 To run, execute the setup script (in `scripts/setup.sh`) to install all required dependencies in a virtual
 environment. Activate the environment by running `source .venv/bin/activate` from the root of the project, and finally, run the
-program using `python3 main.py`.
+program using `python3 src/main.py`.

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -e
-set -x
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 ROOT_DIR="${DIR}/.."
@@ -25,7 +24,7 @@ pip3 install -r "$ROOT_DIR/requirements.txt"
   PACKAGE_DIR="${ROOT_DIR}/.venv/lib/python${MAJOR_PYTHON_VERSION}/site-packages"
   ZIP_FILE="${APP_NAME}.zip"
 
-  cp "${ROOT_DIR}/main.py" "${PACKAGE_DIR}"
+  cp "${ROOT_DIR}/src/"*.py "${PACKAGE_DIR}"
   cd "${PACKAGE_DIR}"
   zip -FSr "${ROOT_DIR}/${ZIP_FILE}" .
 )
