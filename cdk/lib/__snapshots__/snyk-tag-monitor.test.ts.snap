@@ -349,9 +349,28 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "snyktagmonitorsnyktagmonitorrate2days0855530AE": {
+    "snyktagmonitorsnyktagmonitorrate1day0AllowEventRuleSnykTagMonitorsnyktagmonitorAE4097CFB7932521": {
       "Properties": {
-        "ScheduleExpression": "rate(2 days)",
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "snyktagmonitor01C2294D",
+            "Arn",
+          ],
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::GetAtt": [
+            "snyktagmonitorsnyktagmonitorrate1day0D20FBF83",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "snyktagmonitorsnyktagmonitorrate1day0D20FBF83": {
+      "Properties": {
+        "ScheduleExpression": "rate(1 day)",
         "State": "ENABLED",
         "Targets": [
           {
@@ -366,25 +385,6 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
         ],
       },
       "Type": "AWS::Events::Rule",
-    },
-    "snyktagmonitorsnyktagmonitorrate2days0AllowEventRuleSnykTagMonitorsnyktagmonitorAE4097CF9D0524BC": {
-      "Properties": {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": {
-          "Fn::GetAtt": [
-            "snyktagmonitor01C2294D",
-            "Arn",
-          ],
-        },
-        "Principal": "events.amazonaws.com",
-        "SourceArn": {
-          "Fn::GetAtt": [
-            "snyktagmonitorsnyktagmonitorrate2days0855530AE",
-            "Arn",
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
     },
     "snyktagmonitortopicF2FA58D7": {
       "Properties": {
