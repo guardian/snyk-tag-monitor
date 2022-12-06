@@ -54,6 +54,9 @@ def record_tag_count(number_of_tags: int, app_name: str):
     tag_hard_limit = 5000
 
     if (number_of_tags > tag_warning_limit):
-        msg = f'There are currently {number_of_tags} Snyk tags. Snyk has a limit of {tag_hard_limit} tags. Go do something about it...'
+        msg = \
+            f'There are currently {number_of_tags} Snyk tags.' + \
+            f'Snyk has a limit of {tag_hard_limit} tags. ' + \
+            'Go do something about it...'
         _send_notification(sns_topic_arn, msg, _stage)
         print("sent sns notification")

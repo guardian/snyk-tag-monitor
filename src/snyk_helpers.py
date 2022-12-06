@@ -21,7 +21,7 @@ def _get_snyk_tags(snyk_group_id: str, snyk_api_key: str,
         snyk_group_id, snyk_api_key, page_number, page_size)
 
     if (response.status_code != 200):
-        print(f'Failed to get page {page_number} of tags from snyk')
+        print(f'error: failed to get page {page_number} of tags from snyk')
         print(f'{response.status_code} : {response.content}')
         raise Exception(f'{response.status_code} : {response.content}')
     else:
@@ -55,7 +55,7 @@ def _delete_tag(tag_dict, group_id, snyk_key):
             'Authorization': 'token ' + snyk_key},
         json=json_body)
     if response.status_code != 200:
-        print("Failed to delete tag")
+        print(f'warning: failed to delete tag, tag: {str(tag_dict)}')
         print(f'code : {response.status_code}, content: {response.content}')
 
 
