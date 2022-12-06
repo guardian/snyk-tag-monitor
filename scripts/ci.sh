@@ -24,8 +24,8 @@ pip3 install -r "$ROOT_DIR/requirements.txt"
   MAJOR_PYTHON_VERSION="3.9"
   PACKAGE_DIR="${ROOT_DIR}/.venv/lib/python${MAJOR_PYTHON_VERSION}/site-packages"
   ZIP_FILE="${APP_NAME}.zip"
-
-  cp "${ROOT_DIR}/main.py" "${PACKAGE_DIR}"
-  cd "${PACKAGE_DIR}"
+  cd "$ROOT_DIR"
+  cp ./*.py "${PACKAGE_DIR}"
+  cd "$PACKAGE_DIR"
   zip -FSr "${ROOT_DIR}/${ZIP_FILE}" .
 )
