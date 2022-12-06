@@ -59,6 +59,7 @@ export class SnykTagMonitor extends GuStack {
 			environment: {
 				SNS_TOPIC_ARN: topic.topicArn,
 			},
+			timeout: Duration.minutes(15)
 		};
 
 		const lambda = new GuScheduledLambda(this, app, lambdaProps);
