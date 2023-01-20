@@ -190,6 +190,16 @@ exports[`The SnykTagMonitor stack matches the snapshot 1`] = `
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
+    "snyktagmonitorEventInvokeConfig5F4D7B41": {
+      "Properties": {
+        "FunctionName": {
+          "Ref": "snyktagmonitor01C2294D",
+        },
+        "MaximumRetryAttempts": 1,
+        "Qualifier": "$LATEST",
+      },
+      "Type": "AWS::Lambda::EventInvokeConfig",
+    },
     "snyktagmonitorServiceRole8EBA8B3B": {
       "Properties": {
         "AssumeRolePolicyDocument": {
