@@ -10,7 +10,6 @@ jobs:
   security:
     uses: guardian/.github/.github/workflows/sbt-node-snyk.yml@main
     with:
-      DEBUG: true
       ORG: guardian-security
       SKIP_PYTHON: false
       PYTHON_VERSION: 3.9
