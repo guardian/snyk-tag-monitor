@@ -57,6 +57,7 @@ def record_tag_count(number_of_tags: int, app_name: str):
         msg = \
             f'There are currently {number_of_tags} Snyk tags.' + \
             f'Snyk has a limit of {tag_hard_limit} tags. ' + \
-            'Go do something about it...'
+            'Go do something about it...\n' + \
+            'This message is from the snyk-tag-monitor'
         _send_notification(sns_topic_arn, msg, _stage)
         print("sent sns notification")
