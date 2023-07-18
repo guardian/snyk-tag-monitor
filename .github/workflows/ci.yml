@@ -55,3 +55,16 @@ jobs:
               - cdk/cdk.out
             snyk-tag-monitor:
               - snyk-tag-monitor.zip
+
+      - name: swap credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.GU_RIFF_RAFF_CHECKSUM_ROLE_ARN }}
+          aws-region: eu-west-1
+
+      - name: Compare checksums
+        uses: guardian/riff-raff-checksum@main
+        with:
+          projectName: security::snyk-tag-monitor
+          teamCityMainBuildNumber: 86
+          currentBuildNumber: ${{github.run_number}}
