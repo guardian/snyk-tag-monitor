@@ -28,7 +28,7 @@ jobs:
           aws-region: eu-west-1
 
       - name: list repo contents
-        run: aws ls s3://riffraff-artifact/security::snyk-tag-monitor/94
+        run: aws s3 ls s3://riffraff-artifact/security::snyk-tag-monitor/94
         shell: bash
 
       - name: Compare checksums
