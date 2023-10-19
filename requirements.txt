@@ -1,4 +1,4 @@
-boto3==1.26.9
+boto3==1.28.66
 certifi>=2023.7.22 #overrides vulnerable versions introduced by pysnyk and requests
 requests==2.31.0
 pysnyk==0.9.18
