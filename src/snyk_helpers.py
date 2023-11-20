@@ -1,11 +1,11 @@
-from requests import Response
 import requests
+from requests import Response
 from snyk import SnykClient
 
 
 def _get_snyk_tag_page(snyk_group_id: str, snyk_api_key: str,
                        page_number: int, page_size: int) -> Response:
-    snykurl: str = "https://api.snyk.io/api/v1/group/" + snyk_group_id + \
+    snykurl: str = "https://api.snyk.io/api/group/" + snyk_group_id + \
         "/tags?perPage=" + str(page_size) + "&page=" + str(page_number)
     headers: dict[str, str] = {
         'Authorization': f'token {snyk_api_key}',
@@ -43,7 +43,7 @@ def _get_snyk_tags(snyk_group_id: str, snyk_api_key: str,
 
 def _delete_tag(tag_dict, group_id, snyk_key):
 
-    delete_tag_url = "https://api.snyk.io/api/v1/group/" + group_id + "/tags/delete"
+    delete_tag_url = "https://api.snyk.io/api/group/" + group_id + "/tags/delete"
     json_body = {
         "key": tag_dict['key'],
         "value": tag_dict['value'],
