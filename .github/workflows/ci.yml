@@ -19,6 +19,7 @@ jobs:
       # required by aws-actions/configure-aws-credentials
       id-token: write
       contents: read
+      pull-requests: write # required by guardian/actions-riff-raff
     steps:
       - uses: actions/checkout@v4
 
@@ -48,6 +49,8 @@ jobs:
         uses: guardian/actions-riff-raff@v3
         with:
           app: snyk-tag-monitor
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          commentingStage: INFRA
           projectName: security::snyk-tag-monitor
           configPath: cdk/cdk.out/riff-raff.yaml
           contentDirectories: |
