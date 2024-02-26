@@ -16,19 +16,12 @@ jobs:
 
     # See https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
     permissions:
-      # required by aws-actions/configure-aws-credentials
+      # required by guardian/actions-riff-raff
       id-token: write
       contents: read
       pull-requests: write # required by guardian/actions-riff-raff
     steps:
       - uses: actions/checkout@v4
-
-      # Setup AWS credentials to enable uploading to S3 for Riff-Raff.
-      # See https://github.com/aws-actions/configure-aws-credentials
-      - uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
-          aws-region: eu-west-1
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -46,9 +39,10 @@ jobs:
         run: ./scripts/ci.sh
 
       - name: Upload to riff-raff
-        uses: guardian/actions-riff-raff@v3
+        uses: guardian/actions-riff-raff@v4
         with:
           app: snyk-tag-monitor
+          roleArn: ${{ secrets.GU_RIFF_RAFF_ROLE_ARN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           commentingStage: INFRA
           projectName: security::snyk-tag-monitor
