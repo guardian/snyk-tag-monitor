@@ -25,26 +25,26 @@ export class SnykTagMonitor extends GuStack {
 			new EmailSubscription('devx.security@guardian.co.uk'),
 		);
 
-        const metricProps: MetricProps = {
-            namespace: 'snyk-tag-monitor',
-            metricName: 'snykTagCount',
-            dimensionsMap: {
-                'stage': this.stage
-            },
-            period: Duration.days(1),
-            statistic: "Minimum"
-        }
-        const tagMetric = new Metric(metricProps)
+		const metricProps: MetricProps = {
+			namespace: 'snyk-tag-monitor',
+			metricName: 'snykTagCount',
+			dimensionsMap: {
+				stage: this.stage,
+			},
+			period: Duration.days(1),
+			statistic: 'Minimum',
+		};
+		const tagMetric = new Metric(metricProps);
 
-        const tagAlarmProps: GuAlarmProps = {
-            comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
-            threshold: 4500,
-            evaluationPeriods: 1,
-            snsTopicName: topic.topicName,
-            metric: tagMetric,
-            app: app,
-            }
-        const tagAlarm = new GuAlarm(this, `${app}-alarm`, tagAlarmProps)
+		const tagAlarmProps: GuAlarmProps = {
+			comparisonOperator: ComparisonOperator.GREATER_THAN_THRESHOLD,
+			threshold: 4500,
+			evaluationPeriods: 1,
+			snsTopicName: topic.topicName,
+			metric: tagMetric,
+			app: app,
+		};
+		const tagAlarm = new GuAlarm(this, `${app}-alarm`, tagAlarmProps);
 
 		const lambdaProps: GuScheduledLambdaProps = {
 			rules: [{ schedule: Schedule.rate(Duration.days(7)) }],
@@ -60,13 +60,15 @@ export class SnykTagMonitor extends GuStack {
 				SNS_TOPIC_ARN: topic.topicArn,
 			},
 			timeout: Duration.minutes(5),
-			retryAttempts: 1
+			retryAttempts: 1,
 		};
 
 		const lambda = new GuScheduledLambda(this, app, lambdaProps);
 		topic.grantPublish(lambda);
-        const policyStatement = new PolicyStatement({actions: ['cloudwatch:PutMetricData'], resources: ['*']})
-        lambda.addToRolePolicy(policyStatement)
-		
+		const policyStatement = new PolicyStatement({
+			actions: ['cloudwatch:PutMetricData'],
+			resources: ['*'],
+		});
+		lambda.addToRolePolicy(policyStatement);
 	}
 }
