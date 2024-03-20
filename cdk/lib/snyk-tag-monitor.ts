@@ -47,7 +47,7 @@ export class SnykTagMonitor extends GuStack {
         const tagAlarm = new GuAlarm(this, `${app}-alarm`, tagAlarmProps)
 
 		const lambdaProps: GuScheduledLambdaProps = {
-			rules: [{ schedule: Schedule.rate(Duration.days(1)) }],
+			rules: [{ schedule: Schedule.rate(Duration.days(7)) }],
 			monitoringConfiguration: {
 				toleratedErrorPercentage: 50,
 				snsTopicName: topic.topicName,
