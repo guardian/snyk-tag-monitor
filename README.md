@@ -1,4 +1,4 @@
-# This project has been deprecated
+# This project is no longer in use
 
 Snyk no longer has a tag limit
 
