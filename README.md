@@ -1,3 +1,7 @@
+# This project is no longer in use
+
+Snyk no longer has a tag limit
+
 ## Snyk Tag Monitor
 
 Snyk allowed us a custom limit of 5000 unique key-value pairs that can be used as tags. This scheduled lambda first clears out any orphaned tags, then counts up the remaining tags in use on Snyk projects. The lambda runs every day, and sends
